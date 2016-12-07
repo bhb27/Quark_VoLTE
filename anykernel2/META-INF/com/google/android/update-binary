@@ -98,7 +98,7 @@ fi;
 ## credits for tweakprop @kl3 http://forum.xda-developers.com/showthread.php?t=2664332 | https://notabug.org/kl3/tweakprop
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.buildprop)" == 1 ]; then
 mount -o remount,rw /system;
-tweak="/tmp/anykernel/system/tweak.prop";
+tweak="/tmp/anykernel/tools/tweak.prop";
 ## abort tweak if tweak.prop is not found or is empty
 	if [ -s $tweak ]; then
 

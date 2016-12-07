@@ -267,7 +267,8 @@ dump_boot;
 
 #replace files for custom CM base
 replace_file init.superuser.rc 750 init.superuser.rc;
-insert_line init.rc "init.superuser.rc" after "import /init.environ.rc" "import /init.superuser.rc";
+remove_line init.qcom.rc "init.mmi.volte.rc"
+insert_line init.rc "init.mmi.volte.rc" after "import init.qcom.power.rc" "import init.mmi.volte.rc";
 
 # end ramdisk changes
 
