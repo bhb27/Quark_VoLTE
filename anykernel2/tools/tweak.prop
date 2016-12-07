@@ -10,3 +10,4 @@ persist.radio.RATE_ADAPT_ENABLE=1
 persist.radio.ROTATION_ENABLE=1
 persist.radio.VT_ENABLE=1
 persist.radio.VT_HYBRID_ENABLE=1
+net.lte.volte_call_capable=true
