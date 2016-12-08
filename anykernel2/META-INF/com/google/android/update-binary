@@ -100,7 +100,6 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
 
   #bin need 2000 and 0755 to execute
   set_perm_recursive 0 2000 0755 0755 /system/bin/ATFWD-daemon;
-  set_perm_recursive 0 2000 0755 0755 /system/bin/imscmservice;
   set_perm_recursive 0 2000 0755 0755 /system/bin/imsdatadaemon;
   set_perm_recursive 0 2000 0755 0755 /system/bin/imsqmidaemon;
   set_perm_recursive 0 2000 0755 0755 /system/bin/ims_rtp_daemon;
