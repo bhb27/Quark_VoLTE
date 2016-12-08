@@ -70,8 +70,9 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.initd)" == 1 ]; then
   set_perm_recursive 0 0 0755 0755 /system/etc/init.d;
   mount -o remount,ro /system;
 fi;
-
-ui_print "Installing kernel...";
+ui_print "Updated VoLTE configurations...";
+ui_print " ";
+ui_print "Patching kernel...";
 for i in $($bb --list); do
   $bb ln -s $bb /tmp/anykernel/bin/$i;
 done;
@@ -85,11 +86,25 @@ fi;
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
   ui_print " ";
-  ui_print "Updating VoLTE files...";
+  ui_print "Patching System...";
   mount -o remount,rw /system;
 
-  cp -rf /tmp/anykernel/system/etc/firmware/wlan/qca_cld/* /system/etc/firmware/wlan/qca_cld/;
-  set_perm_recursive 0 0 0755 0644 /system/etc/firmware/wlan/qca_cld/;
+ cp -rf /tmp/anykernel/system/* /system/;
+
+  # 0644 general app/frame/lib permission
+  set_perm_recursive 0 0 0755 0644 /system/app;
+  set_perm_recursive 0 0 0755 0644 /system/etc;
+  set_perm_recursive 0 0 0755 0644 /system/framework;
+  set_perm_recursive 0 0 0755 0644 /system/priv-app;
+  set_perm_recursive 0 0 0755 0644 /system/vendor/lib;
+
+  #bin need 2000 and 0755 to execute
+  set_perm_recursive 0 2000 0755 0755 /system/bin/ATFWD-daemon;
+  set_perm_recursive 0 2000 0755 0755 /system/bin/imscmservice;
+  set_perm_recursive 0 2000 0755 0755 /system/bin/imsdatadaemon;
+  set_perm_recursive 0 2000 0755 0755 /system/bin/imsqmidaemon;
+  set_perm_recursive 0 2000 0755 0755 /system/bin/ims_rtp_daemon;
+  set_perm_recursive 0 2000 0755 0755 /system/bin/rcs_config.sh;
 
   mount -o remount,ro /system;
 fi;
@@ -133,7 +148,7 @@ tweak="/tmp/anykernel/tools/tweak.prop";
 			fi;
 		if [ "$echo_Patching" == 1 ]; then
 			ui_print " ";
-			ui_print "Patching build.prop";
+			ui_print "Patching build.prop...";
 			break;
 		fi;
 		done;
